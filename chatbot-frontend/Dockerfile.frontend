@@ -1,0 +1,24 @@
+# Use Node for building and serving the frontend
+FROM node:18 AS build
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Compile TypeScript to JavaScript if needed (optional)
+RUN npx tsc
+
+# Build the frontend application
+RUN npm run build
+
+# Use a lightweight web server to serve the build files
+FROM nginx:alpine
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

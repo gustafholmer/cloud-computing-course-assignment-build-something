@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS conversations (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id) ON DELETE CASCADE,
+  started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS messages (
+  id SERIAL PRIMARY KEY,
+  conversation_id INT REFERENCES conversations(id) ON DELETE CASCADE,
+  user_id INT REFERENCES users(id),
+  message_text TEXT NOT NULL,
+  sender VARCHAR(10) CHECK (sender IN ('user', 'bot')),
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

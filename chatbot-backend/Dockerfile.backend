@@ -1,0 +1,18 @@
+FROM node:18
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+# Ensure that init.sql is copied to the correct location
+COPY src/db/init.sql /usr/src/app/init.sql
+
+RUN npx tsc
+
+EXPOSE 5000
+
+# Start the backend
+CMD ["node", "dist/server.js"]  # Adjust the entry point if necessary
