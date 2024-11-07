@@ -2,7 +2,7 @@
 
 This project is a simple chatbot application designed with a microservices architecture, deployed using Kubernetes.
 
-The project is part of the assignment hand-in for the course: **PA2577 H24 lp12 Tillämpad Cloud Computing och Big Data (distans)**
+The project is part of the assignment "Build Something" for the course: **PA2577 H24 lp12 Tillämpad Cloud Computing och Big Data (distans)**
 
 ## Overview
 
